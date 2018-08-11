@@ -40,7 +40,7 @@ class QueryBuilder
 
     protected $appends = [];
 
-    protected $query;
+    protected $query, $queryClone;
 
     protected $result;
 
@@ -70,6 +70,8 @@ class QueryBuilder
         if ($this->hasGroupBy()) {
             $this->query->groupBy($this->groupBy);
         }
+
+        $this->queryClone = clone $this->query;
 
         if ($this->hasLimit()) {
             $this->query->take($this->limit);
