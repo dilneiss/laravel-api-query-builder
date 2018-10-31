@@ -313,7 +313,11 @@ class QueryBuilder
 
         /** @var string $column */
         /** @var string $direction */
-        $this->query->orderBy($column, $direction);
+        if (str_contains($column, '.')) {
+          $this->query->orderByJoin($column, $direction);
+        } else {
+          $this->query->orderBy($column, $direction);
+        }
     }
 
     private function applyCustomFilter($key, $operator, $value, $type = 'Basic')
