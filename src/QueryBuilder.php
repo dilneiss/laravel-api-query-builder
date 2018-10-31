@@ -85,7 +85,9 @@ class QueryBuilder
 
         $this->query->with($this->includes);
 
-        $this->query->select($this->columns);
+        $this->query->select(collect($this->columns)->map(function ($column) {
+          return "{$this->model->getTable()}.{$column}";
+        })->toArray());
 
         return $this;
     }
