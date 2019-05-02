@@ -79,11 +79,11 @@ class QueryBuilder
             $this->query->skip($this->offset);
         }
 
-        array_map([$this, 'addOrderByToQuery'], $this->orderBy);
-
         $this->query->with($this->includes);
 
         $this->query->select($this->columns);
+
+        array_map([$this, 'addOrderByToQuery'], $this->orderBy);
 
         return $this;
     }
