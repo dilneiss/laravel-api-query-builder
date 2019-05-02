@@ -81,13 +81,13 @@ class QueryBuilder
             $this->query->skip($this->offset);
         }
 
-        array_map([$this, 'addOrderByToQuery'], $this->orderBy);
-
         $this->query->with($this->includes);
 
         $this->query->select(collect($this->columns)->map(function ($column) {
           return "{$this->model->getTable()}.{$column}";
         })->toArray());
+
+        array_map([$this, 'addOrderByToQuery'], $this->orderBy);
 
         return $this;
     }
