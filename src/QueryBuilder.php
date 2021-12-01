@@ -34,6 +34,8 @@ class QueryBuilder
 
     protected $includes = [];
 
+    protected $allowedIncludes = [];
+
     protected $groupBy = [];
 
     protected $excludedParameters = [];
@@ -160,6 +162,8 @@ class QueryBuilder
     private function setIncludes($includes)
     {
         $this->includes = array_filter(explode(',', $includes));
+
+        $this->includes = array_filter($this->includes, fn ($key) => in_array($key, $this->allowedIncludes));
     }
 
     private function setPage($page)
