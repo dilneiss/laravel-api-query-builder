@@ -384,7 +384,7 @@ class QueryBuilder
 
     private function customFilterName($key)
     {
-        return 'filterBy' . studly_case($key);
+        return 'filterBy' . Str::studly($key);
     }
 
     private function addAppendsToModel($result)
